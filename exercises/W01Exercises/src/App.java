@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.Comparable;
 import java.util.Comparator;
+import java.util.TreeSet;
+import java.util.TreeMap;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -101,27 +103,74 @@ public class App {
         // return all the values in the set
         System.out.println(myMap.values());
 
-        // * task 6: Create a List of custom objects (e.g., Student with name and age).
-        // Write a function to sort the list by age. (Concepts Covered: Custom
-        // Comparator or Comparable implementation.)
-        // List<Student> sixthList = new ArrayList<>();
-        // Student student1 = new Student("Sumin", 27);
-        // Student student2 = new Student("Alicia", 26);
-        // sixthList.add(student1);
-        // sixthList.add(student2);
-        // sixthList.sort(Comparator.naturalOrder());
+        // !* task 6: Create a List of custom objects (e.g., Student with name and age).
+        // Write a function to sort the list by age.
+        // Concepts Covered: Custom Comparator or Comparable implementation.
 
-        // // * task 7 modify map in task 5 to add more info
-        // Map<String, String> myNewMap = new HashMap<String, String>();
-        // myNewMap.put("Korea", "capital: Seoul, population: 50m");
-        // myNewMap.put("United Kingdom", "capital: London, population: 70m");
+        // a. Comparator (an interface used to order the objects of user-defined
+        // classes)
+        List<Student> sixthList = new ArrayList<>();
+        Student student1 = new Student("Sumin", 27);
+        Student student2 = new Student("Alicia", 26);
+        Student student3 = new Student("Bob", 38);
+        sixthList.add(student1);
+        sixthList.add(student2);
+        sixthList.add(student3);
+        sixthList.sort((s1, s2) -> Integer.compare(s1.getAge(), s2.getAge()));
+        System.out.println(sixthList);
 
-        // // for each method to iterate values
-        // myNewMap.forEach((k, v) -> System.out.println(v));
-        // System.out.println(myNewMap.values());
-        // // for (int i = 0; i < myNewMap.size(); i++) {
-        // // System.out.println();
-        // // }
+        // b. comparable
+        // sixthList.sort(null);
+        // System.out.println(sixthList);
 
+        // // !* task 7 modify map in task 5 to add more info
+        Map<String, String> myNewMap = new HashMap<String, String>();
+        myNewMap.put("Korea", "capital: Seoul, population: 50m");
+        myNewMap.put("United Kingdom", "capital: London, population: 70m");
+
+        // a. default map iteration
+        for (String value : myNewMap.values()) {
+            System.out.println(value);
+        }
+
+        // b. Map.Entry (key-value pair)
+        for (Map.Entry<String, String> entry : myNewMap.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+
+        // c. for each iteration
+        myNewMap.forEach((k, v) -> System.out.println(v));
+
+        // * task 8: advanced set operations
+        Set<Book> books = new HashSet<>();
+        Book book1 = new Book("Crippled America", "Trump");
+        Book book2 = new Book("Tesla story", "Musk");
+        books.add(book1);
+        books.add(book2);
+        // ! implement equals and hashcode
+
+        // * task 9: HashSet vs TreeSet
+        Set<String> myHashSet = new HashSet<>();
+        Set<String> myTreeSet = new TreeSet<>();
+        myHashSet.add("Hello");
+        myTreeSet.add("Hello");
+        myHashSet.add("Bonjour");
+        myTreeSet.add("Bonjour");
+        // HashSet: descending natural ordering
+        System.out.println(myHashSet);
+        // TreeSet: ascending natural ordering
+        System.out.println(myTreeSet);
+        // ! hashcode implementation / performance
+
+        // * task 10: HashMap
+        Map<String, String> newHashMap = new HashMap<>();
+        Map<String, String> newTreeMap = new TreeMap<>();
+        newHashMap.put("Korea", "Seoul");
+        newTreeMap.put("Korea", "Seoul");
+        newHashMap.put("United Kingdom", "London");
+        newTreeMap.put("United Kingdom", "London");
+        System.out.println(newHashMap);
+        System.out.println(newTreeMap);
+        // ! performance charactersitics and null handling
     }
 }
